@@ -43,7 +43,7 @@ public class AlunoDAO {
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
 
-                        String server = "localhost"; 
+            String server = "localhost"; 
             String database = "db_alunos";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
