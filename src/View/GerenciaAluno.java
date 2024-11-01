@@ -7,16 +7,16 @@ import javax.swing.table.DefaultTableModel;
 
 public class GerenciaAluno extends javax.swing.JFrame {
 
-    private Aluno objaluno; 
+    private Aluno objaluno; // cria o v�nculo com o objaluno
 
     public GerenciaAluno() {
         initComponents();
-        this.objaluno = new Aluno(); 
+        this.objaluno = new Aluno(); // carrega objaluno de aluno
         this.carregaTabela();
     }
-
+    
     @SuppressWarnings("unchecked")
-
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -95,7 +95,19 @@ public class GerenciaAluno extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
+        c_nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c_nomeActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Idade:");
+
+        c_idade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c_idadeActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Curso: ");
 
@@ -163,21 +175,21 @@ public class GerenciaAluno extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }
+    }// </editor-fold>//GEN-END:initComponents
 
-    private void b_cancelarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void b_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_cancelarActionPerformed
         this.setVisible(false);
-    }
+    }//GEN-LAST:event_b_cancelarActionPerformed
 
-    private void b_alterarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void b_alterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_alterarActionPerformed
 
         try {
-        
+            // recebendo e validando dados da interface gr�fica.
             int id = 0;
             String nome = "";
             int idade = 0;
-            String curso = "";
             int fase = 0;
+            String curso = "";
 
             if (this.c_nome.getText().length() < 2) {
                 throw new Mensagens("Nome deve conter ao menos 2 caracteres.");
@@ -209,10 +221,10 @@ public class GerenciaAluno extends javax.swing.JFrame {
                 id = Integer.parseInt(this.jTableAlunos.getValueAt(this.jTableAlunos.getSelectedRow(), 0).toString());
             }
 
-            
+            // envia os dados para o Aluno processar
             if (this.objaluno.UpdateAlunoBD(curso, fase, id, nome, idade)) {
 
-            
+                // limpa os campos
                 this.c_nome.setText("");
                 this.c_idade.setText("");
                 this.c_curso.setText("");
@@ -226,11 +238,11 @@ public class GerenciaAluno extends javax.swing.JFrame {
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um n�mero.");
         } finally {
-            carregaTabela(); 
+            carregaTabela(); // atualiza a tabela.
         }
-    }
+    }//GEN-LAST:event_b_alterarActionPerformed
 
-    private void jTableAlunosMouseClicked(java.awt.event.MouseEvent evt) {
+    private void jTableAlunosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAlunosMouseClicked
 
         if (this.jTableAlunos.getSelectedRow() != -1) {
 
@@ -245,11 +257,11 @@ public class GerenciaAluno extends javax.swing.JFrame {
             this.c_fase.setText(fase);
 
         }
-    }
+    }//GEN-LAST:event_jTableAlunosMouseClicked
 
-    private void b_apagarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void b_apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_apagarActionPerformed
         try {
-            
+            // validando dados da interface gr�fica.
             int id = 0;
             if (this.jTableAlunos.getSelectedRow() == -1) {
                 throw new Mensagens("Primeiro Selecione um Aluno para APAGAR");
@@ -257,14 +269,15 @@ public class GerenciaAluno extends javax.swing.JFrame {
                 id = Integer.parseInt(this.jTableAlunos.getValueAt(this.jTableAlunos.getSelectedRow(), 0).toString());
             }
 
-                        int resposta_usuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja APAGAR este Aluno ?");
+            // retorna 0 -> primeiro bot�o | 1 -> segundo bot�o | 2 -> terceiro bot�o
+            int resposta_usuario = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja APAGAR este Aluno ?");
 
-            if (resposta_usuario == 0) {
+            if (resposta_usuario == 0) {// clicou em SIM
 
-                
+                // envia os dados para o Aluno processar
                 if (this.objaluno.DeleteAlunoBD(id)) {
 
-                    
+                    // limpa os campos
                     this.c_nome.setText("");
                     this.c_idade.setText("");
                     this.c_curso.setText("");
@@ -280,13 +293,22 @@ public class GerenciaAluno extends javax.swing.JFrame {
         } catch (Mensagens erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } finally {
-            
+            // atualiza a tabela.
             carregaTabela();
         }
-    }
+    }//GEN-LAST:event_b_apagarActionPerformed
 
-    
-     
+    private void c_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_nomeActionPerformed
+       
+    }//GEN-LAST:event_c_nomeActionPerformed
+
+    private void c_idadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_idadeActionPerformed
+       
+    }//GEN-LAST:event_c_idadeActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
     @SuppressWarnings("unchecked")
     public void carregaTabela() {
 
@@ -308,7 +330,7 @@ public class GerenciaAluno extends javax.swing.JFrame {
     }
 
     public static void main(String args[]) {
-    
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -325,7 +347,7 @@ public class GerenciaAluno extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GerenciaAluno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GerenciaAluno().setVisible(true);
@@ -334,7 +356,7 @@ public class GerenciaAluno extends javax.swing.JFrame {
         
     }
 
-    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton b_alterar;
     private javax.swing.JButton b_apagar;
     private javax.swing.JButton b_cancelar;
@@ -348,5 +370,5 @@ public class GerenciaAluno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAlunos;
-   
+    // End of variables declaration//GEN-END:variables
 }

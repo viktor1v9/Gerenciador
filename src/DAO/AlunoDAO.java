@@ -35,23 +35,24 @@ public class AlunoDAO {
 
     public Connection getConexao() {
 
-        Connection connection = null; 
+        Connection connection = null;  //inst�ncia da conex�o
 
         try {
 
-            
+            // Carregamento do JDBC Driver
             String driver = "com.mysql.cj.jdbc.Driver";
             Class.forName(driver);
 
-            String server = "localhost"; 
+            // Configurar a conex�o
+            String server = "localhost"; //caminho do MySQL
             String database = "db_alunos";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
-            String password = "rootpass";
+            String password = "yoda123456trab";
 
             connection = DriverManager.getConnection(url, user, password);
 
-        
+            // Testando..
             if (connection != null) {
                 System.out.println("Status: Conectado!");
             } else {
@@ -60,7 +61,7 @@ public class AlunoDAO {
 
             return connection;
 
-        } catch (ClassNotFoundException e) {  
+        } catch (ClassNotFoundException e) {  //Driver n�o encontrado
             System.out.println("O driver nao foi encontrado. " + e.getMessage() );
             return null;
 
@@ -70,10 +71,10 @@ public class AlunoDAO {
         }
     }
 
-    
+    // Retorna a Lista de Alunos(objetos)
     public ArrayList getMinhaLista() {
         
-        MinhaLista.clear(); 
+        MinhaLista.clear(); // Limpa nosso ArrayList
 
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -99,6 +100,7 @@ public class AlunoDAO {
         return MinhaLista;
     }
 
+    // Cadastra novo aluno
     public boolean InsertAlunoBD(Aluno objeto) {
         String sql = "INSERT INTO tb_alunos(id,nome,idade,curso,fase) VALUES(?,?,?,?,?)";
 
@@ -122,6 +124,7 @@ public class AlunoDAO {
 
     }
 
+    // Deleta um aluno espec�fico pelo seu campo ID
     public boolean DeleteAlunoBD(int id) {
         try {
             Statement stmt = this.getConexao().createStatement();
@@ -134,6 +137,7 @@ public class AlunoDAO {
         return true;
     }
 
+    // Edita um aluno espec�fico pelo seu campo ID
     public boolean UpdateAlunoBD(Aluno objeto) {
 
         String sql = "UPDATE tb_alunos set nome = ? ,idade = ? ,curso = ? ,fase = ? WHERE id = ?";
