@@ -1,5 +1,7 @@
 # Ignorar arquivos de configuração de formulários
 *.form
+# Ignorar todos os arquivos compilados Java
+*.class
 
 src/View/TelaPrincipal.form
 build/classes/.netbeans_automatic_build
