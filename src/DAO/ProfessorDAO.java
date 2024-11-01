@@ -45,7 +45,7 @@ public class ProfessorDAO {
             String database = "db_professores";
             String url = "jdbc:mysql://" + server + ":3306/" + database + "?useTimezone=true&serverTimezone=UTC";
             String user = "root";
-            String password = "yoda123456trab";
+            String password = "root";
             
             connection = DriverManager.getConnection(url, user, password);
             
