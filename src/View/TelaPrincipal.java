@@ -1,17 +1,30 @@
 package View;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.Group;
+import javafx.scene.control.TextField;
+import javafx.scene.text.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+
 public class TelaPrincipal extends javax.swing.JFrame {
 
     GerenciaAluno objeto = new GerenciaAluno();
     GerenciaProfessor objeto2 = new GerenciaProfessor();
-
+    
     public TelaPrincipal() {
         initComponents();
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -21,6 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,55 +83,95 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenu2);
 
         jMenu2.setText("Sobre");
-        jMenuBar1.add(jMenu2);
+        
+        jMenuItem6.setText("Créditos");               
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        	 public void actionPerformed(java.awt.event.ActionEvent evt) {
+        		jMenuItem6ActionPerformed(evt);
+        	}
+        });
+        jMenu2.add(jMenuItem6);
 
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 710, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 710, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 496, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 496, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {
+        
         CadastroAluno objeto = new CadastroAluno();
         objeto.setVisible(true);
-    }// GEN-LAST:event_jMenuItem1ActionPerformed
+    }
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
+        
         System.exit(0);
-    }// GEN-LAST:event_jMenuItem3ActionPerformed
+    }
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem2ActionPerformed
-        // GerenciaAluno objeto = new GerenciaAluno();
-
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {
         objeto.setVisible(true);
         objeto.carregaTabela();
-    }// GEN-LAST:event_jMenuItem2ActionPerformed
+    }
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem4ActionPerformed
-        CadastroProfessor objeto = new CadastroProfessor();
-        objeto.setVisible(true);
-    }// GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {
+       CadastroProfessor objeto = new CadastroProfessor();
+       objeto.setVisible(true);
+    }
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {
         GerenciaProfessor objeto = new GerenciaProfessor();
         objeto.setVisible(true);
-    }// GEN-LAST:event_jMenuItem5ActionPerformed
+    }
+    
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {
+    	Credits obj = new Credits();
+    	
+    	JFrame frame = new JFrame();    
+    	frame.setSize(500,300);
+    	
+    	JButton btn = new JButton("Créditos");
+    	JButton btn2 = new JButton("Ferramentas utilizadas");
+    	
+    	JPanel swingPanel = new JPanel();
+    	swingPanel.add(btn);
+    	swingPanel.add(btn2);
+    	
+    	frame.add(swingPanel, BorderLayout.NORTH);
+    	
+    	JFXPanel fxPanel = new JFXPanel();
+		frame.add(fxPanel, BorderLayout.CENTER);
+		
+		btn.addActionListener(e -> {
+            Platform.runLater(() -> obj.initTela1(fxPanel));
+        });
+		
+		btn2.addActionListener(e -> {
+            Platform.runLater(() -> obj.initTela2(fxPanel));
+        });
+		
+		frame.setVisible(true);
+      
+    }
+    
+   
 
     public static void main(String args[]) {
-
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -126,19 +180,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
+            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaPrincipal().setVisible(true);
@@ -146,7 +196,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+   
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -155,5 +205,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
-    // End of variables declaration//GEN-END:variables
+    private javax.swing.JMenuItem jMenuItem6;
+    
+   
 }
